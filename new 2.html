@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Solver Class</h2>
+
+<p>Demonstration of how to add a method in a JavaScript Class.</p>
+
+<p id="demo"></p>
+<input type="text" id="t1" value='[1, "Plus", 3]'/>
+<!--<input type="text" id="t2" value="[[1,2],[3,4],[5,6]]"/>-->
+<button onclick="myFunction()">Solve it</button>
+<p id="demo1">Answer</p>
+<p id="demo2"></p>
+<p id="demo3"></p>
+
+<script>
+
+
+/*var inputArray = [];
+var size = 3; //Maximum Array size
+
+for(var i=0; i<size; i++) {
+	
+	//Taking Input from user
+	 inputArray[i] = prompt('Enter Element ' + (i+1));
+}
+*/
+
+
+class Solver {
+  constructor(operand1,operator,operand2) {
+    this.operand1 = operand1;
+    this.operator = operator;
+    this.operand2 = operand2;
+  }
+  
+  Add() {
+  	switch(this.operator){
+  	case "plus":
+  	return (this.operand1 + this.operand2);
+    case "minus":
+    return (this.operand1 - this.operand2);
+    case "times":
+    return (this.operand1 * this.operand2);
+    case "divide":
+    if (this.operand2!=0){
+    return (this.operand1 / this.operand2);
+    }
+    else{
+    return "Can not be devided by zero!!"
+    }
+    }
+    
+    
+  }
+}
+/*var a1 = JSON.parse(document.getElementById("t1").value);
+var a2 = JSON.parse(document.getElementById("t2").value);
+inputArray[0]=a1[0];
+inputArray[1]=a1[1];
+inputArray[2]=a1[2];*/
+
+
+//mycar = new Solver(parseFloat(inputArray[0]),inputArray[1].toLowerCase().trim(),parseFloat(inputArray[2]));
+//problem1 = new Solver(parseFloat(a1[0]),a1[1].toLowerCase().trim(),parseFloat(a1[2]));
+function myFunction() {
+  //var x = document.getElementById("t1").value;
+  var a1 = JSON.parse(document.getElementById("t1").value);
+  //var a2 = JSON.parse(document.getElementById("t2").value);
+
+  //document.getElementById("demo1").innerHTML = x;
+  //document.getElementById("demo2").innerHTML = a1[2];
+  //if ((a1[0].length!=3)&& (a1[2].length!=3)) {
+  //problem1 = new Solver(parseFloat(a1[0]),a1[1].toLowerCase().trim(),parseFloat(a1[2]));
+  //document.getElementById("demo2").innerHTML = problem1.Add();
+  
+  if ((a1.length==3) && (Array.isArray(a1[0])==false) && (Array.isArray(a1[2])==false)){
+  results=result(a1[0],a1[1],a1[2])
+  document.getElementById("demo2").innerHTML =results;
+  
+  }
+  else if ((a1.length==3)&& (Array.isArray(a1[0])==true) && (Array.isArray(a1[2])==false)){
+  b1=[];
+  b1[0]=result(a1[0][0],a1[0][1],a1[0][2])
+  b1[1]=a1[1];
+  b1[2]=a1[2];
+  results=result(b1[0],b1[1],b1[2])
+  document.getElementById("demo2").innerHTML =results;
+  }
+  else if ((a1.length==3)&& (Array.isArray(a1[0])==false) && (Array.isArray(a1[2])==true)){
+  b1=[];
+  b1[0]=a1[0];
+  b1[1]=a1[1];
+  b1[2]=result(a1[2][0],a1[2][1],a1[2][2])
+  results=result(b1[0],b1[1],b1[2])
+  document.getElementById("demo2").innerHTML =results;
+  }
+  else if ((a1.length==3)&& (Array.isArray(a1[0])==true) && (Array.isArray(a1[2])==true)){
+  b1=[];
+  b1[0]=result(a1[0][0],a1[0][1],a1[0][2])
+  b1[1]=a1[1];
+  b1[2]=result(a1[2][0],a1[2][1],a1[2][2])
+  results=result(b1[0],b1[1],b1[2])
+  document.getElementById("demo2").innerHTML =results;
+  }
+  else{
+	document.getElementById("demo2").innerHTML = "Wrong input";
+  }
+  //problem1 = new Solver(parseFloat(a1[0]),a1[1].toLowerCase().trim(),parseFloat(a1[2]));
+  //document.getElementById("demo2").innerHTML = problem1.Add();
+  
+}
+
+function result(a,b,c){
+	problem2 = new Solver(parseFloat(a),b.toLowerCase().trim(),parseFloat(c));
+    //document.getElementById("demo2").innerHTML = problem2.Add();
+	return problem2.Add();
+
+
+}
+
+//document.getElementById("demo2").innerHTML = "asd";
+</script>
+
+</body>
+</html>
